@@ -19,7 +19,14 @@ SessionFactory = async_sessionmaker(
 # 数据库依赖注入
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with SessionFactory() as session:
-        yield session
+        try:
+            yield session  # 返回数据库会话给路由处理函数
+            await session.commit()  # 无异常，提交事务
+        except Exception:
+            await session.rollback()  #
+            raise
+        finally:
+            await session.close()  # 关闭会话
 
 
 # 用于临时使用的创建数据库表的函数

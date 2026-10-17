@@ -4,7 +4,7 @@ from auth.user_manager import fastapi_users
 from auth.user_router import register_fastapi_users_routers
 from exception.exception import register_exception_handlers
 from lifespan import lifespan
-from router.dishs_router import router as dish_router
+from router.dish_router import router as dish_router
 
 app = FastAPI(lifespan=lifespan, description="FastAPI-Users 练习项目实战")
 
