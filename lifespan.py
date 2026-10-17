@@ -1,13 +1,9 @@
 from contextlib import asynccontextmanager
-from redis.asyncio import Redis
-
 from typing import TypedDict
 
 from fastapi import FastAPI
-
-from core.database import create_db_and_tables
-
 from loguru import logger
+from redis.asyncio import Redis
 
 from core.redis_db import create_auth_redis
 
