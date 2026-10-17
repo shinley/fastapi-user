@@ -6,6 +6,7 @@ from loguru import logger
 from redis.asyncio import Redis
 
 from core.redis_db import create_auth_redis
+from core.database import engine
 
 
 class State(TypedDict, total=False):
@@ -26,5 +27,6 @@ async def lifespan(app: FastAPI):
     # --- 关闭时执行 ---
     await cache_redis.aclose()
     await auth_redis.aclose()
+    engine.dispose()
 
     logger.info("应用关闭, 资源已释放")
