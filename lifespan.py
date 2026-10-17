@@ -27,6 +27,6 @@ async def lifespan(app: FastAPI):
     # --- 关闭时执行 ---
     await cache_redis.aclose()
     await auth_redis.aclose()
-    engine.dispose()
+    await engine.dispose()
 
     logger.info("应用关闭, 资源已释放")
